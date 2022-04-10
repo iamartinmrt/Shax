@@ -1,0 +1,7 @@
+class GeneralConstants{
+  static const String heroTagStarterLogo = "starterLogo";
+  static const String heroTagLoginBackground = "LoginBackground";
+  static const String hiveBoxName = "StoredData";
+  static const String starterLogoImagePath = "assets/images/starter_logo.png";
+  static const String loginBackgroundImagePath = "assets/images/login_bg.jpg";
+}
