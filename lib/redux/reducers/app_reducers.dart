@@ -9,13 +9,5 @@ AppState appReducer(AppState state, action) {
   return AppState(
     productState: productReducer(state.productState, action),
     user: null,
-    appLifecycleState: appLifecycleStateReducer(state.appLifecycleState!, action),
   );
-}
-
-AppLifecycleState appLifecycleStateReducer(AppLifecycleState state, dynamic action) {
-  if (action is OnAppStateChangedAction) {
-    return action.state;
-  }
-  return state;
 }

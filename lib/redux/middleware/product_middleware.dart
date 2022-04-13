@@ -26,7 +26,11 @@ Middleware<AppState> _onLoadProductListPageAction(ShaxLogger logger, ProductFetc
       final _result = await fetchListProducts(ListProductsRequest(page: data.pageNumber));
       logger.logInfo("$action _onLoadCompletedWorkoutsHistoryAction ${_result.toString()}");
       if(_result.isSuccess()){
-        action.listItems.addAll(_result.content!);
+        List<Product> list = store.state.productState.itemList.toList();
+        list.addAll(_result.content!);
+        final newAction = action.copyWith(listItems: list, listNewItems: _result.content!);
+        next(newAction);
+        return;
       }
     }catch(error){
       if(error is! DioError) {

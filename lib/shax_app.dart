@@ -9,7 +9,6 @@ import 'package:shax/presentation/screen/splash/splash_screen.dart';
 import 'package:shax/redux/states/app_state.dart';
 import 'package:core/core.dart';
 import 'package:shax/redux/store.dart';
-import 'common/app_lifecycle_observer.dart';
 import 'common/flavor/flavor_banner.dart';
 import 'common/flavor/flavor_config.dart';
 import 'common/keys.dart';
@@ -57,8 +56,7 @@ class _ShaxAppState extends State<ShaxApp> {
           }
           return StoreProvider<AppState>(
             store: snapshot.data!,
-            child: ReduxAppLifecycleObserver(
-              child: MaterialApp(
+            child: MaterialApp(
                   title: 'ShaX',
                   debugShowCheckedModeBanner: false,
                   navigatorKey: Keys.navigatorKey,
@@ -71,7 +69,7 @@ class _ShaxAppState extends State<ShaxApp> {
                   ],
                   onGenerateRoute: DependencyProvider.get<NavigationGraph>().getRoute,
             ),
-          ));
+          );
         }
       ),
     );
