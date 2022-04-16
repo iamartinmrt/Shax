@@ -5,11 +5,14 @@ import 'package:shax/redux/states/product_state.dart';
 
 final productReducer = combineReducers<ProductState>([
   TypedReducer<ProductState, LoadProductListPageAction>(_showLoadingAction),
-  TypedReducer<ProductState, LoadingDataProcessCompleteChangeAction>(_changeIsLoadingCompletedAction),
+  TypedReducer<ProductState, RefreshListProductsAction>(_onRefreshListProducts),
 ]);
 
 ProductState _showLoadingAction(ProductState state, LoadProductListPageAction action) =>
-    state.copyWith(itemList: action.listItems, newItemReceivedList: action.listNewItems, homePageKey: action.pageNumber);
+    state.copyWith(itemList: action.listItems, newItemReceivedList: action.listNewItems, homePageKey: action.pageNumber, isRefresh: action.isRefresh);
 
-ProductState _changeIsLoadingCompletedAction(ProductState state, LoadingDataProcessCompleteChangeAction action) =>
-    state.copyWith(isLoadingDataCompleted: action.isLoadingComplete);
+ProductState _onRefreshListProducts(ProductState state, RefreshListProductsAction action) =>
+    state.copyWith(homePageKey: 1, itemList: <Product>[], newItemReceivedList: <Product>[], isRefresh: true);
+
+// ProductState _changeIsLoadingCompletedAction(ProductState state, LoadingDataProcessCompleteChangeAction action) =>
+//     state.copyWith(isLoadingDataCompleted: action.isLoadingComplete);
