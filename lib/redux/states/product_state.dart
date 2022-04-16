@@ -6,37 +6,33 @@ class ProductState extends Equatable{
   final int homePageKey;
   final List<Product> itemList;
   final List<Product> newItemReceivedList;
-  final bool isLoadingDataCompleted;
-  final List<Product> savedList;
+  final bool isRefresh;
 
   const ProductState({
     required this.homePageKey,
     required this.newItemReceivedList,
     required this.itemList,
-    required this.isLoadingDataCompleted,
-    required this.savedList
+    required this.isRefresh,
   });
 
   factory ProductState.initial() =>
-      const ProductState(itemList: <Product>[], savedList: <Product>[], newItemReceivedList: <Product>[], homePageKey: 0, isLoadingDataCompleted: false);
+      const ProductState(itemList: <Product>[], newItemReceivedList: <Product>[], homePageKey: 0, isRefresh: false);
 
   ProductState copyWith({
     int? homePageKey,
     List<Product>? itemList,
-    List<Product>? savedList,
     List<Product>? newItemReceivedList,
-    bool? isLoadingDataCompleted,
+    bool? isRefresh,
   }) {
     return ProductState(
       homePageKey: homePageKey ?? this.homePageKey,
       itemList: itemList ?? this.itemList,
       newItemReceivedList: newItemReceivedList ?? this.newItemReceivedList,
-      savedList: savedList ?? this.savedList,
-      isLoadingDataCompleted: isLoadingDataCompleted ?? this.isLoadingDataCompleted,
+      isRefresh: isRefresh ?? this.isRefresh,
     );
   }
 
   @override
-  List<Object?> get props => [itemList, savedList, newItemReceivedList, homePageKey, isLoadingDataCompleted];
+  List<Object?> get props => [itemList, newItemReceivedList, homePageKey, isRefresh];
   
 }
