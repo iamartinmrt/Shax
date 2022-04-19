@@ -6,6 +6,7 @@ import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:redux/redux.dart';
 import 'package:shax/di/dio_setting.dart';
 import 'package:shax/presentation/screen/splash/splash_screen.dart';
+import 'package:shax/redux/actions/user_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
 import 'package:core/core.dart';
 import 'package:shax/redux/store.dart';
@@ -13,6 +14,7 @@ import 'common/flavor/flavor_banner.dart';
 import 'common/flavor/flavor_config.dart';
 import 'common/keys.dart';
 import 'di/injection_container.dart';
+import 'models/entities/user.dart';
 import 'navigation/navigation_graph.dart';
 import 'navigation/route/app_route.dart';
 
@@ -32,11 +34,18 @@ class _ShaxAppState extends State<ShaxApp> {
   void initState(){
     InjectionContainer.register();
     _store = createStore(widget.flavorConfig).then((value) {
+      _getUserFromCacheInitial(value);
       DioCustomSetting.addInterceptor(value);
       return value;
     });
 
     super.initState();
+  }
+
+  void _getUserFromCacheInitial(Store<AppState> store){
+    Box<User> hiveBox = DependencyProvider.get<Box<User>>();
+    User user = hiveBox.get(ApiConstants.userInstance, defaultValue: const User(email: "", id: "", token: ""))!;
+    store.dispatch((UpdateUserInfoAction(userToken: user.token, id: user.id, email: user.email)));
   }
 
   @override

@@ -6,11 +6,12 @@ import 'package:shax/domain/usecase/product_fetch_list_products.dart';
 import 'package:shax/redux/reducers/app_reducers.dart';
 import 'package:shax/redux/states/app_state.dart';
 
+import '../models/entities/user.dart';
 import 'middleware/middleware.dart';
 
 Future<Store<AppState>> createStore(FlavorConfig flavorConfig)async{
 
-  DependencyProvider.registerSingleton<Box<dynamic>>(await Hive.openBox<dynamic>(GeneralConstants.hiveBoxName)); // TODO : encrypt hive data
+  DependencyProvider.registerSingleton<Box<User>>(await Hive.openBox<User>(GeneralConstants.hiveBoxName)); // TODO : encrypt hive data
 
   return Store<AppState>(
     appReducer,

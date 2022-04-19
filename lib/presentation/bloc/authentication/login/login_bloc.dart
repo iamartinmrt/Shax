@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:shax/domain/usecase/login_call_login_auth.dart';
 import 'package:shax/domain/usecase/login_call_update_user.dart';
 import 'package:shax/models/request/auth_request.dart';
+import '../../../../models/entities/user.dart';
 import 'bloc.dart';
 
 
@@ -13,7 +14,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
 
   LoginCallLoginAuth callLoginAuth;
   LoginCallUpdateUser callUpdateUser;
-  Box<dynamic> hiveBox;
+  Box<User> hiveBox;
   ShaxLogger logger;
 
   LoginBloc({
@@ -45,7 +46,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
     try{
     final _result = await callLoginAuth(AuthRequest(email: state.email, password: state.password));
       if(_result.isSuccess()){
-        hiveBox.put(ApiConstants.userToken, _result.content);
+        hiveBox.put(ApiConstants.userInstance, _result.content!);
         // TODO : add firebase messaging to get deviceToken
         String fbToken = "Mamad";
 
@@ -62,12 +63,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
         final _resultFbUpdate = await callUpdateUser(map);
         if(_resultFbUpdate.isSuccess()){
           if(_resultFbUpdate.content!){
-            emit(state.copyWith(formStatus: SubmissionSuccess(),email: "", password: ""));
+            emit(state.copyWith(formStatus: SubmissionSuccess(),email: "", password: "", user: _result.content!));
           }else{
+            hiveBox.put(ApiConstants.userInstance, const User(token: "", id: "", email: ""));
             emit(state.copyWith(formStatus: SubmissionFailed("Firebase token did not update.")));
           }
         }else{
-          hiveBox.put(ApiConstants.userToken, "");
+          hiveBox.put(ApiConstants.userInstance, const User(token: "", id: "", email: ""));
           emit(state.copyWith(formStatus: SubmissionFailed("Firebase token did not update.")));
         }
       }else{

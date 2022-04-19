@@ -12,6 +12,8 @@ import 'package:shax/redux/actions/navigation_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
 import 'package:shax/presentation/bloc/authentication/login/bloc.dart';
 
+import '../../../../redux/actions/user_actions.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -111,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
             stateTextWithIcon = ButtonState.success;
             _controllerPassword.clear;
             _controllerEmail.clear;
+            /// StoreProvider.of<AppState>(context).dispatch(UpdateUserInfoAction(userToken: state.user!.token, id: state.user!.id, email: state.user!.email));
             StoreProvider.of<AppState>(context).dispatch(NavigateToDashboardScreenAction());
           }else if(state.formStatus is SubmissionFailed){
             stateTextWithIcon = ButtonState.fail;

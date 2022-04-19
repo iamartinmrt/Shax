@@ -28,6 +28,8 @@ import 'package:shax/presentation/bloc/authentication/login/bloc.dart';
 import 'package:shax/presentation/bloc/authentication/signup/bloc.dart';
 import 'package:shax/presentation/bloc/splash/splash_bloc.dart';
 
+import '../models/entities/user.dart';
+
 
 class InjectionContainer{
 
@@ -130,13 +132,13 @@ class InjectionContainer{
     DependencyProvider.registerFactory<LoginBloc>(
             () => LoginBloc(
               logger: DependencyProvider.get<ShaxLogger>(),
-              hiveBox: DependencyProvider.get<Box<dynamic>>(),
+              hiveBox: DependencyProvider.get<Box<User>>(),
               callUpdateUser: DependencyProvider.get<LoginCallUpdateUser>(),
               callLoginAuth: DependencyProvider.get<LoginCallLoginAuth>(),
             ));
     DependencyProvider.registerFactory<SignupBloc>(
             () => SignupBloc(
-              hiveBox: DependencyProvider.get<Box<dynamic>>(),
+              hiveBox: DependencyProvider.get<Box<User>>(),
               signupCallSignupAuth: DependencyProvider.get<SignupCallSignupAuth>(),
             ));
 

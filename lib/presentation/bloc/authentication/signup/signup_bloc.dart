@@ -5,11 +5,13 @@ import 'package:shax/domain/usecase/signup_call_signup_auth.dart';
 import 'package:shax/models/request/auth_request.dart';
 import 'package:shax/presentation/bloc/authentication/signup/bloc.dart';
 
+import '../../../../models/entities/user.dart';
+
 
 class SignupBloc extends Bloc<SignupEvent, SignupState>{
 
   SignupCallSignupAuth signupCallSignupAuth;
-  Box<dynamic> hiveBox;
+  Box<User> hiveBox;
 
   SignupBloc({
     required this.hiveBox,

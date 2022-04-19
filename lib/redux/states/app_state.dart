@@ -5,17 +5,17 @@ import 'package:shax/redux/states/product_state.dart';
 
 class AppState{
 
-  final User? user;
+  final User user;
   final ProductState productState;
 
   AppState({
     required this.productState,
-    this.user,
+    required this.user,
   });
 
   factory AppState.initial() {
     return AppState(
-      user: null,
+      user: User.initial(),
       productState: ProductState.initial(),
     );
   }
