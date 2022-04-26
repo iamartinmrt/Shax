@@ -5,7 +5,7 @@
 It is an uncompleted sample project.
 
 ### Next tasks:
-- Complete Home page
+- Add custom app theme selector
 - Add Firebase Messaging
 
 ### Tech Stack:
