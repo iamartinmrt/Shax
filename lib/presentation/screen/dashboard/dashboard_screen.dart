@@ -68,12 +68,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
         body: Center(
           child: _widgetOptions.elementAt(_currentIndex),
         ));
-    // return BlocProvider(
-    //   create: DependencyProvider.get<DashboardBloc>(),
-    //   child:
-    //       BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
-    //
-    //   }),
-    // );
   }
 }

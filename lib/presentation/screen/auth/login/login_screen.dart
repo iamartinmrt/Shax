@@ -29,12 +29,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final _controllerPassword = TextEditingController();
   final _formKeyEmail = GlobalKey<FormState>();
   final _formKeyPass = GlobalKey<FormState>();
-  final String _noAccountSignup = "You don't have account? SignUp.";
 
   final FocusNode _emailNode = FocusNode();
   final FocusNode _passNode = FocusNode();
 
   late LoginBloc _loginBloc;
+
+  @override
+  void dispose() {
+    _controllerEmail.dispose();
+    _controllerPassword.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -176,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           StoreProvider.of<AppState>(context).dispatch(NavigateToSignUpAction());
                         },
                         style: ElevatedButton.styleFrom(elevation: 0, primary: Colors.white, onPrimary: Colors.black),
-                        child: Text(_noAccountSignup)),
+                        child: const Text(TextConstants.noAccountSignup)),
                   )
                 ],
               ),

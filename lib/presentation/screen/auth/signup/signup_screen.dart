@@ -32,18 +32,20 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKeyPass = GlobalKey<FormState>();
   final _formKeyRePass = GlobalKey<FormState>();
 
-  final String _loginIfHaveAccount = "You have account? Login.";
-  final String _codeNotCorrect = "Code is Not Correct";
-  final String _passwordNotMatch = "Passwords doesn't match!";
-  final String _hintText = "Enter a new email and password!";
-  final String _passwordText = "Password";
-  final String _repeatedPasswordText = "Repeat Password";
-
   final FocusNode _emailNode = FocusNode();
   final FocusNode _passNode = FocusNode();
   final FocusNode _rePassNode = FocusNode();
 
   late SignupBloc _signupBloc;
+
+  @override
+  void dispose() {
+    _controllerEmail.dispose();
+    _controllerCode.dispose();
+    _controllerPassword.dispose();
+    _controllerRepeatPassword.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -140,9 +142,9 @@ class _SignupScreenState extends State<SignupScreen> {
               width: _width*0.9,
               child: Column(
                 children: [
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      child: Text(_hintText)
+                  const Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: Text(TextConstants.enterEmailPassword)
                   ),
                   Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -166,7 +168,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: PasswordField(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                       focusNode: _passNode,
-                      labelText: _passwordText,
+                      labelText: TextConstants.password,
                       nextFocusNode: _rePassNode,
                       onChangeAction: (value) => BlocProvider.of<SignupBloc>(context).add(SignupPasswordChanged(value)),
                       controllerPassword: _controllerPassword,
@@ -178,7 +180,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: PasswordField(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                       focusNode: _rePassNode,
-                      labelText: _repeatedPasswordText,
+                      labelText: TextConstants.repeatPassword,
                       onChangeAction: (value) => BlocProvider.of<SignupBloc>(context).add(SignupRepeatedPasswordChanged(value)),
                       validator: _rePasswordFieldValidator,
                       controllerPassword: _controllerRepeatPassword,
@@ -205,7 +207,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           StoreProvider.of<AppState>(context).dispatch(NavigateToLoginAction());
                         },
                         style: ElevatedButton.styleFrom(elevation: 0, primary: Colors.white, onPrimary: Colors.black),
-                        child: Text(_loginIfHaveAccount)),
+                        child: const Text(TextConstants.noAccountLogin)),
                   )
                 ],
               ),
@@ -241,7 +243,7 @@ class _SignupScreenState extends State<SignupScreen> {
     // if return null we say it's valid, else we return error string
     if(_controllerRepeatPassword.text != _controllerPassword.text){
       // _showSnackBar("Passwords doesn't match!");
-      return _passwordNotMatch;
+      return TextConstants.passwordDoesNotMatch;
     }else {
       return null;
     }
