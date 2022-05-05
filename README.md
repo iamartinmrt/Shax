@@ -5,6 +5,7 @@
 It is an uncompleted sample project.
 
 ### Next tasks:
+- Create Local datasrouce for user caches
 - Add custom app theme selector
 - Add Firebase Messaging
 
