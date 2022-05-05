@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
@@ -33,7 +34,7 @@ class PasswordField extends StatelessWidget {
         obscureText: true,
         maxLines: 1,
         decoration: InputDecoration(
-            labelText: labelText ?? 'Password',
+            labelText: labelText ?? TextConstants.password,
             border: const OutlineInputBorder(),
             suffixIcon: const Icon(Icons.security)
         ),

@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +38,7 @@ class EmailField extends StatelessWidget {
         decoration: InputDecoration(
           suffixIcon: const Icon(Icons.mail),
           border: const OutlineInputBorder(),
-          labelText: textValue ?? "Email",
+          labelText: textValue ?? TextConstants.email,
         ),
         validator: validator,
         onChanged: onChangeEditText,

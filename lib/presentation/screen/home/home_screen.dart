@@ -93,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildBody(BuildContext context, _ViewModel vm){
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SmartRefresher(
         enablePullDown: true,
         enablePullUp: false,
@@ -109,7 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Card(
-                    color: Colors.white,
                     elevation: 15.0,
                     child: Row(
                       children: [

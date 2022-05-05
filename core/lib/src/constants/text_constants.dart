@@ -10,4 +10,11 @@ class TextConstants{
   static const String emailNotValid = "Email is not valid";
   static const String passwordNotValid = "Password is not valid";
   static const String noAccountSignup = "You don't have account? SignUp.";
+  static const String confirm = "Confirm";
+  static const String loading = "Loading";
+  static const String failed = "Failed";
+  static const String success = "Success";
+  static const String email = "Email";
+  static const String home = "Home";
+  static const String profile = "Profile";
 }

@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:redux/redux.dart';
 import 'package:shax/di/dio_setting.dart';
+import 'package:shax/models/request/no_param_request.dart';
 import 'package:shax/presentation/screen/splash/splash_screen.dart';
 import 'package:shax/redux/actions/user_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
@@ -14,6 +15,7 @@ import 'common/flavor/flavor_banner.dart';
 import 'common/flavor/flavor_config.dart';
 import 'common/keys.dart';
 import 'di/injection_container.dart';
+import 'domain/usecase/local/get_user_local.dart';
 import 'models/entities/user.dart';
 import 'navigation/navigation_graph.dart';
 import 'navigation/route/app_route.dart';
@@ -29,6 +31,7 @@ class ShaxApp extends StatefulWidget {
 
 class _ShaxAppState extends State<ShaxApp> {
   late Future<Store<AppState>> _store;
+  late GetUserLocal getUserLocal;
 
   @override
   void initState(){
@@ -43,9 +46,12 @@ class _ShaxAppState extends State<ShaxApp> {
   }
 
   void _getUserFromCacheInitial(Store<AppState> store){
-    Box<User> hiveBox = DependencyProvider.get<Box<User>>();
-    User user = hiveBox.get(ApiConstants.userInstance, defaultValue: const User(email: "", id: "", token: ""))!;
-    store.dispatch((UpdateUserInfoAction(userToken: user.token, id: user.id, email: user.email)));
+    getUserLocal = DependencyProvider.get<GetUserLocal>();
+    Result<User> result = getUserLocal(NoParamRequest());
+    if(!result.isSuccess()){
+      throw Exception("getLocalUser was not successful.");
+    }
+    store.dispatch((UpdateUserInfoAction(userToken: result.content!.token, id: result.content!.id, email: result.content!.email)));
   }
 
   @override
@@ -65,18 +71,26 @@ class _ShaxAppState extends State<ShaxApp> {
           }
           return StoreProvider<AppState>(
             store: snapshot.data!,
-            child: MaterialApp(
-                  title: 'ShaX',
-                  debugShowCheckedModeBanner: false,
-                  navigatorKey: Keys.navigatorKey,
-                  initialRoute: AppRoute.splash,
-                  supportedLocales: const [Locale('en')],
-                  navigatorObservers: FlavorConfig.isDev() ?
-                  [NavigationHistoryObserver()] : [],
-                  onGenerateInitialRoutes: (name) => [
-                    DependencyProvider.get<NavigationGraph>().getRoute(RouteSettings(name: name))
-                  ],
-                  onGenerateRoute: DependencyProvider.get<NavigationGraph>().getRoute,
+            child: StoreConnector<AppState, _ViewModel>(
+              // rebuildOnChange: ,
+              distinct: true,
+              converter: _ViewModel.fromStore,
+              builder: (context, vm) => MaterialApp(
+                title: 'ShaX',
+                theme: ThemeConstants.lightAppTheme,
+                darkTheme: ThemeConstants.darkAppTheme,
+                themeMode: vm.themeMode,
+                debugShowCheckedModeBanner: false,
+                navigatorKey: Keys.navigatorKey,
+                initialRoute: AppRoute.splash,
+                supportedLocales: const [Locale('en')],
+                navigatorObservers: FlavorConfig.isDev() ?
+                [NavigationHistoryObserver()] : [],
+                onGenerateInitialRoutes: (name) => [
+                  DependencyProvider.get<NavigationGraph>().getRoute(RouteSettings(name: name))
+                ],
+                onGenerateRoute: DependencyProvider.get<NavigationGraph>().getRoute,
+              ),
             ),
           );
         }
@@ -96,3 +110,18 @@ class _ShaxAppState extends State<ShaxApp> {
   }
 
 }
+
+class _ViewModel {
+  ThemeMode themeMode;
+
+  _ViewModel({
+    required this.themeMode,
+  });
+
+  static _ViewModel fromStore(Store<AppState> store) {
+    return _ViewModel(
+      themeMode: store.state.themeMode,
+    );
+  }
+}
+

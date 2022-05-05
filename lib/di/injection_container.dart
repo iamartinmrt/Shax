@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:shax/data/datasources/local/user/user_local_datasource.dart';
 import 'package:shax/data/datasources/remote/authentication/login/login_remote_datasource.dart';
 import 'package:shax/data/datasources/remote/authentication/signup/signup_remote_datasource.dart';
 import 'package:shax/data/datasources/remote/product/product_remote_datasource.dart';
@@ -11,10 +12,12 @@ import 'package:shax/data/repositories/product_repository_impl.dart';
 import 'package:shax/data/repositories/signup_repository_impl.dart';
 import 'package:shax/data/repositories/splash_repository_impl.dart';
 import 'package:shax/di/dio_setting.dart';
+import 'package:shax/domain/repositories/local/user_repository.dart';
 import 'package:shax/domain/repositories/login_repository.dart';
 import 'package:shax/domain/repositories/product_repository.dart';
 import 'package:shax/domain/repositories/signup_repository.dart';
 import 'package:shax/domain/repositories/splash_repository.dart';
+import 'package:shax/domain/usecase/local/get_user_local.dart';
 import 'package:shax/domain/usecase/login_call_login_auth.dart';
 import 'package:shax/domain/usecase/login_call_update_user.dart';
 import 'package:shax/domain/usecase/product_call_create_product.dart';
@@ -28,6 +31,8 @@ import 'package:shax/presentation/bloc/authentication/login/bloc.dart';
 import 'package:shax/presentation/bloc/authentication/signup/bloc.dart';
 import 'package:shax/presentation/bloc/splash/splash_bloc.dart';
 
+import '../data/repositories/local/user_repository_impl.dart';
+import '../domain/usecase/local/put_user_local.dart';
 import '../models/entities/user.dart';
 
 
@@ -72,6 +77,11 @@ class InjectionContainer{
           dio: DependencyProvider.get<Dio>(),
           logger: DependencyProvider.get<ShaxLogger>(),
         ));
+    DependencyProvider.registerLazySingleton<UserLocalDatasource>(
+            () => UserLocalDatasourceImpl(
+          hiveBox: DependencyProvider.get<Box<User>>(),
+          logger: DependencyProvider.get<ShaxLogger>(),
+        ));
 
 
     // Repository
@@ -90,6 +100,10 @@ class InjectionContainer{
     DependencyProvider.registerLazySingleton<ProductRepository>(
             () => ProductRepositoryImpl(
           datasource: DependencyProvider.get<ProductRemoteDatasource>(),
+        ));
+    DependencyProvider.registerLazySingleton<UserRepository>(
+            () => UserRepositoryImpl(
+          datasource: DependencyProvider.get<UserLocalDatasource>(),
         ));
 
 
@@ -121,6 +135,14 @@ class InjectionContainer{
     DependencyProvider.registerLazySingleton<ProductFetchListProducts>(
             () => ProductFetchListProducts(
           repository: DependencyProvider.get<ProductRepository>(),
+        ));
+    DependencyProvider.registerLazySingleton<GetUserLocal>(
+            () => GetUserLocal(
+          repository: DependencyProvider.get<UserRepository>(),
+        ));
+    DependencyProvider.registerLazySingleton<PutUserLocal>(
+            () => PutUserLocal(
+          repository: DependencyProvider.get<UserRepository>(),
         ));
 
 

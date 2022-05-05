@@ -11,6 +11,8 @@ export 'src/logger/shax_logger.dart';
 export 'src/secure/jwt_token_provider.dart';
 export 'src/usecases/usecase.dart';
 export 'src/constants/text_constants.dart';
+export 'src/constants/theme_constants.dart';
+export 'src/constants/color_constants.dart';
 
 class CoreModuleInitializer {
   static void init() {

@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: (){
                           StoreProvider.of<AppState>(context).dispatch(NavigateToSignUpAction());
                         },
-                        style: ElevatedButton.styleFrom(elevation: 0, primary: Colors.white, onPrimary: Colors.black),
+                        // style: ElevatedButton.styleFrom(elevation: 0, primary: Colors.white, onPrimary: Colors.black),
                         child: const Text(TextConstants.noAccountSignup)),
                   )
                 ],

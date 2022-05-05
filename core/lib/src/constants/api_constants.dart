@@ -1,5 +1,5 @@
 class ApiConstants{
-  static const String baseUrl = "http://100.10.1.61:8000";
+  static const String baseUrl = "http://100.10.2.122:8000";
   static const String userToken = "userToken";
   static const String userInstance = "userInstance";
   static const String fetchInitCallUrl = "/init_call/";

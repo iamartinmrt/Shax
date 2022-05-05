@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:redux/redux.dart';
 import 'package:shax/redux/actions/navigation_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
+import '../domain/usecase/local/put_user_local.dart';
 import '../models/entities/user.dart';
 import '../redux/actions/user_actions.dart';
 
@@ -25,6 +26,7 @@ class DioCustomSetting {
     Box<User> hiveBox = DependencyProvider.get<Box<User>>();
     ShaxLogger logger = DependencyProvider.get<ShaxLogger>();
     Dio dio = DependencyProvider.get<Dio>();
+    PutUserLocal putUserLocal = DependencyProvider.get<PutUserLocal>();
 
     // store.onChange.listen((event) {
     //
@@ -39,7 +41,6 @@ class DioCustomSetting {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
         RequestOptions newOptions = options;
-        // String userToken = hiveBox.get(ApiConstants.userToken, defaultValue: "");
         if(store.state.user.token != "") {
           newOptions.headers.putIfAbsent("Authorization", () => "Bearer ${store.state.user.token}");
         }
@@ -50,8 +51,7 @@ class DioCustomSetting {
         Response newResponse = response;
         if(response.statusCode == 401){
           logger.logInfo("During call ${response.requestOptions.path} error ${response.statusCode}${response.statusMessage} occurred!");
-          /// store.dispatch(UpdateUserInfoAction(userToken: "", id: "", email: ""));
-          hiveBox.put(ApiConstants.userInstance, const User(token: "", id: "", email: ""));
+          putUserLocal(const User(token: "", id: "", email: ""));
           store.dispatch(NavigateToLoginAction());
         }
         if (response.statusCode != 200 && response.statusCode != 201) {
@@ -62,8 +62,7 @@ class DioCustomSetting {
       onError: (DioError error, ErrorInterceptorHandler handler) {
         logger.logError("During call ${error.response!.requestOptions.path} error ${error.response!.statusCode}${error.response!.statusMessage} occurred!\nError text: ${error.response!.data["message"]}");
         if(error.response!.statusCode == 401){
-          /// store.dispatch(UpdateUserInfoAction(userToken: "", id: "", email: ""));
-          hiveBox.put(ApiConstants.userInstance, const User(token: "", id: "", email: ""));
+          putUserLocal(const User(token: "", id: "", email: ""));
           store.dispatch(NavigateToLoginAction());
         }
         return handler.next(error);

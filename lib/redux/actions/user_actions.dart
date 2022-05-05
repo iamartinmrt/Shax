@@ -4,3 +4,5 @@ class UpdateUserInfoAction{
   final String? email;
   UpdateUserInfoAction({this.userToken, this.id, this.email});
 }
+
+// class LogoutUserAction{}

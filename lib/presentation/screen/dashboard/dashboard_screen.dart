@@ -25,10 +25,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
         bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                    blurRadius: 20, color: Colors.black.withOpacity(.1))
+                    blurRadius: 30, color: Colors.black.withOpacity(.1))
               ],
             ),
             child: SafeArea(
@@ -49,11 +48,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   tabs: const [
                     GButton(
                       icon: Icons.home,
-                      text: 'Home',
+                      text: TextConstants.home,
                     ),
                     GButton(
                       icon: Icons.person,
-                      text: 'Profile',
+                      text: TextConstants.profile,
                     ),
                   ],
                   selectedIndex: _currentIndex,
