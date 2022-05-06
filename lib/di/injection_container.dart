@@ -2,22 +2,27 @@ import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:shax/data/datasources/local/theme/theme_mode_local_datasource.dart';
 import 'package:shax/data/datasources/local/user/user_local_datasource.dart';
 import 'package:shax/data/datasources/remote/authentication/login/login_remote_datasource.dart';
 import 'package:shax/data/datasources/remote/authentication/signup/signup_remote_datasource.dart';
 import 'package:shax/data/datasources/remote/product/product_remote_datasource.dart';
 import 'package:shax/data/datasources/remote/splash/splash_remote_datasource.dart';
+import 'package:shax/data/repositories/local/theme_mode_repository_impl.dart';
 import 'package:shax/data/repositories/login_repository_impl.dart';
 import 'package:shax/data/repositories/product_repository_impl.dart';
 import 'package:shax/data/repositories/signup_repository_impl.dart';
 import 'package:shax/data/repositories/splash_repository_impl.dart';
 import 'package:shax/di/dio_setting.dart';
+import 'package:shax/domain/repositories/local/theme_mode_repository.dart';
 import 'package:shax/domain/repositories/local/user_repository.dart';
 import 'package:shax/domain/repositories/login_repository.dart';
 import 'package:shax/domain/repositories/product_repository.dart';
 import 'package:shax/domain/repositories/signup_repository.dart';
 import 'package:shax/domain/repositories/splash_repository.dart';
+import 'package:shax/domain/usecase/local/get_theme_mode_local.dart';
 import 'package:shax/domain/usecase/local/get_user_local.dart';
+import 'package:shax/domain/usecase/local/put_theme_mode_local.dart';
 import 'package:shax/domain/usecase/login_call_login_auth.dart';
 import 'package:shax/domain/usecase/login_call_update_user.dart';
 import 'package:shax/domain/usecase/product_call_create_product.dart';
@@ -83,6 +88,11 @@ class InjectionContainer{
           hiveBox: DependencyProvider.get<Box<AppData>>(),
           logger: DependencyProvider.get<ShaxLogger>(),
         ));
+    DependencyProvider.registerLazySingleton<ThemeModeLocalDatasource>(
+            () => ThemeModeLocalDatasourceImpl(
+          hiveBox: DependencyProvider.get<Box<AppData>>(),
+          logger: DependencyProvider.get<ShaxLogger>(),
+        ));
 
 
     // Repository
@@ -105,6 +115,10 @@ class InjectionContainer{
     DependencyProvider.registerLazySingleton<UserRepository>(
             () => UserRepositoryImpl(
           datasource: DependencyProvider.get<UserLocalDatasource>(),
+        ));
+    DependencyProvider.registerLazySingleton<ThemeModeRepository>(
+            () => ThemeModeRepositoryImpl(
+          datasource: DependencyProvider.get<ThemeModeLocalDatasource>(),
         ));
 
 
@@ -144,6 +158,14 @@ class InjectionContainer{
     DependencyProvider.registerLazySingleton<PutUserLocal>(
             () => PutUserLocal(
           repository: DependencyProvider.get<UserRepository>(),
+        ));
+    DependencyProvider.registerLazySingleton<GetThemeModeLocal>(
+            () => GetThemeModeLocal(
+          repository: DependencyProvider.get<ThemeModeRepository>(),
+        ));
+    DependencyProvider.registerLazySingleton<PutThemeModeLocal>(
+            () => PutThemeModeLocal(
+          repository: DependencyProvider.get<ThemeModeRepository>(),
         ));
 
 
