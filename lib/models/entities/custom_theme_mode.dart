@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+part 'custom_theme_mode.g.dart';
 
 @HiveType(typeId: 2)
 enum CustomThemeMode{
