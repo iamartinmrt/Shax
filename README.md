@@ -5,8 +5,10 @@
 It is an uncompleted sample project.
 
 ### Next tasks:
-- Create Local datasrouce for user caches
-- Add custom app theme selector
+- Create Local datasrouce for user caches (Done ✅)
+- Add custom app theme selector (Done ✅)
+- Add AppCache model for hive
+- Fix switch theme
 - Add Firebase Messaging
 
 ### Tech Stack:
