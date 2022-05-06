@@ -18,7 +18,7 @@ extension ThemeModeExtension on ThemeMode{
         return CustomThemeMode.light;
       case ThemeMode.dark:
         return CustomThemeMode.dark;
-      default:
+      case ThemeMode.system:
         return CustomThemeMode.light;
     }
   }

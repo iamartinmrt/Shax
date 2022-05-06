@@ -5,8 +5,11 @@ import 'package:hive/hive.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:redux/redux.dart';
 import 'package:shax/di/dio_setting.dart';
+import 'package:shax/domain/usecase/local/get_theme_mode_local.dart';
+import 'package:shax/models/entities/app_data.dart';
 import 'package:shax/models/request/no_param_request.dart';
 import 'package:shax/presentation/screen/splash/splash_screen.dart';
+import 'package:shax/redux/actions/app_state_actions.dart';
 import 'package:shax/redux/actions/user_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
 import 'package:core/core.dart';
@@ -19,6 +22,7 @@ import 'domain/usecase/local/get_user_local.dart';
 import 'models/entities/user.dart';
 import 'navigation/navigation_graph.dart';
 import 'navigation/route/app_route.dart';
+import '../../../../models/entities/custom_theme_mode.dart';
 
 class ShaxApp extends StatefulWidget {
   final FlavorConfig flavorConfig;
@@ -32,12 +36,13 @@ class ShaxApp extends StatefulWidget {
 class _ShaxAppState extends State<ShaxApp> {
   late Future<Store<AppState>> _store;
   late GetUserLocal getUserLocal;
+  late GetThemeModeLocal getThemeModeLocal;
 
   @override
   void initState(){
     InjectionContainer.register();
     _store = createStore(widget.flavorConfig).then((value) {
-      _getUserFromCacheInitial(value);
+      _getAppCacheInitial(value);
       DioCustomSetting.addInterceptor(value);
       return value;
     });
@@ -45,13 +50,15 @@ class _ShaxAppState extends State<ShaxApp> {
     super.initState();
   }
 
-  void _getUserFromCacheInitial(Store<AppState> store){
+  void _getAppCacheInitial(Store<AppState> store){
     getUserLocal = DependencyProvider.get<GetUserLocal>();
+    getThemeModeLocal = DependencyProvider.get<GetThemeModeLocal>();
     Result<User> result = getUserLocal(NoParamRequest());
-    if(!result.isSuccess()){
-      throw Exception("getLocalUser was not successful.");
+    Result<ThemeMode> resultThemeMode = getThemeModeLocal(NoParamRequest());
+    if(!result.isSuccess() || !resultThemeMode.isSuccess()){
+      throw Exception("getLocalUser or getLocalThemeMode was not successful.");
     }
-    store.dispatch((UpdateUserInfoAction(userToken: result.content!.token, id: result.content!.id, email: result.content!.email)));
+    store.dispatch(OnAppDataChanged(appData: AppData.initial().copyWith(user: result.content, themeMode: resultThemeMode.content!.systemToCustom)));
   }
 
   @override
