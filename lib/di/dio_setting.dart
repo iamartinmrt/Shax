@@ -5,7 +5,9 @@ import 'package:redux/redux.dart';
 import 'package:shax/redux/actions/navigation_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
 import '../domain/usecase/local/put_user_local.dart';
+import '../models/entities/app_data.dart';
 import '../models/entities/user.dart';
+import '../redux/actions/app_state_actions.dart';
 import '../redux/actions/user_actions.dart';
 
 
@@ -23,7 +25,7 @@ class DioCustomSetting {
   }
 
   static void addInterceptor(Store<AppState> store){
-    Box<User> hiveBox = DependencyProvider.get<Box<User>>();
+    Box<AppData> hiveBox = DependencyProvider.get<Box<AppData>>();
     ShaxLogger logger = DependencyProvider.get<ShaxLogger>();
     Dio dio = DependencyProvider.get<Dio>();
     PutUserLocal putUserLocal = DependencyProvider.get<PutUserLocal>();
@@ -32,9 +34,9 @@ class DioCustomSetting {
     //
     // });
 
-    hiveBox.watch(key: ApiConstants.userInstance).listen((BoxEvent event) {
-      if(!event.deleted && event.value is User){
-        store.dispatch(UpdateUserInfoAction(userToken: event.value.token, id: event.value.id, email: event.value.email));
+    hiveBox.watch(key: ApiConstants.appDataInstance).listen((BoxEvent event) {
+      if(!event.deleted && event.value is AppData){
+        store.dispatch(OnAppDataChanged(appData: event.value));
       }
     });
 
@@ -51,7 +53,7 @@ class DioCustomSetting {
         Response newResponse = response;
         if(response.statusCode == 401){
           logger.logInfo("During call ${response.requestOptions.path} error ${response.statusCode}${response.statusMessage} occurred!");
-          putUserLocal(const User(token: "", id: "", email: ""));
+          putUserLocal(User.initial());
           store.dispatch(NavigateToLoginAction());
         }
         if (response.statusCode != 200 && response.statusCode != 201) {
@@ -62,7 +64,7 @@ class DioCustomSetting {
       onError: (DioError error, ErrorInterceptorHandler handler) {
         logger.logError("During call ${error.response!.requestOptions.path} error ${error.response!.statusCode}${error.response!.statusMessage} occurred!\nError text: ${error.response!.data["message"]}");
         if(error.response!.statusCode == 401){
-          putUserLocal(const User(token: "", id: "", email: ""));
+          putUserLocal(User.initial());
           store.dispatch(NavigateToLoginAction());
         }
         return handler.next(error);

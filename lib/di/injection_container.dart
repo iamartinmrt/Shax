@@ -33,6 +33,7 @@ import 'package:shax/presentation/bloc/splash/splash_bloc.dart';
 
 import '../data/repositories/local/user_repository_impl.dart';
 import '../domain/usecase/local/put_user_local.dart';
+import '../models/entities/app_data.dart';
 import '../models/entities/user.dart';
 
 
@@ -79,7 +80,7 @@ class InjectionContainer{
         ));
     DependencyProvider.registerLazySingleton<UserLocalDatasource>(
             () => UserLocalDatasourceImpl(
-          hiveBox: DependencyProvider.get<Box<User>>(),
+          hiveBox: DependencyProvider.get<Box<AppData>>(),
           logger: DependencyProvider.get<ShaxLogger>(),
         ));
 
@@ -154,13 +155,12 @@ class InjectionContainer{
     DependencyProvider.registerFactory<LoginBloc>(
             () => LoginBloc(
               logger: DependencyProvider.get<ShaxLogger>(),
-              hiveBox: DependencyProvider.get<Box<User>>(),
+              putUserLocal: DependencyProvider.get<PutUserLocal>(),
               callUpdateUser: DependencyProvider.get<LoginCallUpdateUser>(),
               callLoginAuth: DependencyProvider.get<LoginCallLoginAuth>(),
             ));
     DependencyProvider.registerFactory<SignupBloc>(
             () => SignupBloc(
-              hiveBox: DependencyProvider.get<Box<User>>(),
               signupCallSignupAuth: DependencyProvider.get<SignupCallSignupAuth>(),
             ));
 

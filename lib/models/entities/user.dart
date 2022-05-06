@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 @JsonSerializable(explicitToJson: true)
 class User extends Equatable{
 

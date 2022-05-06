@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:redux/redux.dart';
+import 'package:shax/domain/usecase/local/put_theme_mode_local.dart';
+import 'package:shax/domain/usecase/local/put_user_local.dart';
+import 'package:shax/models/entities/app_data.dart';
 
 import '../../../models/entities/user.dart';
 import '../../../redux/actions/app_state_actions.dart';
@@ -20,11 +23,15 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
-  late Box<User> hiveBox;
+  late Box<AppData> hiveBox;
+  late PutUserLocal putUserLocal;
+  late PutThemeModeLocal putThemeModeLocal;
 
   @override
   void initState() {
-    hiveBox = DependencyProvider.get<Box<User>>();
+    hiveBox = DependencyProvider.get<Box<AppData>>();
+    putUserLocal = DependencyProvider.get<PutUserLocal>();
+    putThemeModeLocal = DependencyProvider.get<PutThemeModeLocal>();
     super.initState();
   }
 
@@ -35,23 +42,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
       converter: _ViewModel.fromStore,
       builder: (context, vm){
         return Scaffold(
+          appBar: AppBar(),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CupertinoSwitch(
                 value: vm.themeMode == ThemeMode.dark,
                 onChanged: (value) {
-                  // TODO : cache the value
                   if(value){
+                    putThemeModeLocal(ThemeMode.dark);
                     vm.changeAppTheme(ThemeMode.dark);
                   }else{
+                    putThemeModeLocal(ThemeMode.light);
                     vm.changeAppTheme(ThemeMode.light);
                   }
                 },
               ),
               ElevatedButton(
                   onPressed: (){
-                    hiveBox.put(ApiConstants.userInstance, const User(token: "", id: "", email: ""));
+                    putUserLocal(User.initial());
                     StoreProvider.of<AppState>(context).dispatch(NavigateToLoginAction());
                   },
                   child: const Text("Logout")

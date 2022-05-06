@@ -2,6 +2,8 @@ import 'package:core/core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shax/models/entities/user.dart';
 
+import '../../../../models/entities/app_data.dart';
+
 abstract class UserLocalDatasource{
   Result<User> getUser();
   Result<bool> putUser(User user);
@@ -9,7 +11,7 @@ abstract class UserLocalDatasource{
 
 class UserLocalDatasourceImpl implements UserLocalDatasource{
 
-  Box<User> hiveBox;
+  Box<AppData> hiveBox;
   ShaxLogger logger;
 
   UserLocalDatasourceImpl({required this.hiveBox, required this.logger});
@@ -17,7 +19,7 @@ class UserLocalDatasourceImpl implements UserLocalDatasource{
   @override
   Result<User> getUser() {
     try {
-      User user = hiveBox.get(ApiConstants.userInstance, defaultValue: const User(email: "", id: "", token: ""))!;
+      User user = hiveBox.get(ApiConstants.appDataInstance, defaultValue: AppData.initial())!.user;
       return Result.success(user);
     }catch(error){
       String textError = "During getUser localDatasource\nError ${error.toString()}";
@@ -29,7 +31,9 @@ class UserLocalDatasourceImpl implements UserLocalDatasource{
   @override
   Result<bool> putUser(User user) {
     try{
-      hiveBox.put(ApiConstants.userInstance, user);
+      AppData appData = hiveBox.get(ApiConstants.appDataInstance, defaultValue: AppData.initial())!;
+      AppData newAppData = appData.copyWith(user: user);
+      hiveBox.put(ApiConstants.appDataInstance, newAppData);
       return Result.success(true);
     }catch(error){
       String textError = "During putUser localDatasource\nError ${error.toString()}";

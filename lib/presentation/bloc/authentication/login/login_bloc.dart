@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:shax/domain/usecase/local/put_user_local.dart';
 import 'package:shax/domain/usecase/login_call_login_auth.dart';
 import 'package:shax/domain/usecase/login_call_update_user.dart';
 import 'package:shax/models/request/auth_request.dart';
+import '../../../../models/entities/app_data.dart';
 import '../../../../models/entities/user.dart';
 import 'bloc.dart';
 
@@ -14,12 +16,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
 
   LoginCallLoginAuth callLoginAuth;
   LoginCallUpdateUser callUpdateUser;
-  Box<User> hiveBox;
+  PutUserLocal putUserLocal;
   ShaxLogger logger;
 
   LoginBloc({
     required this.logger,
-    required this.hiveBox,
+    required this.putUserLocal,
     required this.callUpdateUser,
     required this.callLoginAuth,
   }) : super(LoginState()){
@@ -46,7 +48,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
     try{
     final _result = await callLoginAuth(AuthRequest(email: state.email, password: state.password));
       if(_result.isSuccess()){
-        hiveBox.put(ApiConstants.userInstance, _result.content!);
+        putUserLocal(_result.content!);
         // TODO : add firebase messaging to get deviceToken
         String fbToken = "Mamad";
 
@@ -65,11 +67,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
           if(_resultFbUpdate.content!){
             emit(state.copyWith(formStatus: SubmissionSuccess(),email: "", password: "", user: _result.content!));
           }else{
-            hiveBox.put(ApiConstants.userInstance, const User(token: "", id: "", email: ""));
+            putUserLocal(User.initial());
             emit(state.copyWith(formStatus: SubmissionFailed("Firebase token did not update.")));
           }
         }else{
-          hiveBox.put(ApiConstants.userInstance, const User(token: "", id: "", email: ""));
+          putUserLocal(User.initial());
           emit(state.copyWith(formStatus: SubmissionFailed("Firebase token did not update.")));
         }
       }else{
