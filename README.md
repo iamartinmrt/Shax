@@ -7,7 +7,7 @@ It is an uncompleted sample project.
 ### Next tasks:
 - Create Local datasrouce for user caches (Done ✅)
 - Add custom app theme selector (Done ✅)
-- Add AppCache model for hive
+- Add AppCache model for hive (Done ✅)
 - Fix switch theme
 - Add Firebase Messaging
 
