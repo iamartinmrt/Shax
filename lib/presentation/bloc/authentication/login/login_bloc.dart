@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:core/core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:shax/domain/usecase/local/put_user_local.dart';
@@ -48,9 +49,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
     try{
     final _result = await callLoginAuth(AuthRequest(email: state.email, password: state.password));
       if(_result.isSuccess()){
+        final fbToken = await FirebaseMessaging.instance.getToken();
+        if(fbToken == null || fbToken.isEmpty){
+          throw Exception("Error getting fcm token");
+        }
         putUserLocal(_result.content!);
-        // TODO : add firebase messaging to get deviceToken
-        String fbToken = "Mamad";
 
         Map<String, String> map;
         if(Platform.isAndroid){

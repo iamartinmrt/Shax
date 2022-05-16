@@ -15,26 +15,32 @@ class AppData extends Equatable{
   @HiveField(1)
   final CustomThemeMode themeMode;
 
+  @HiveField(2)
+  final String fcmToken;
+
   const AppData({
     required this.themeMode,
-    required this.user
+    required this.user,
+    required this.fcmToken
   });
 
   factory AppData.initial(){
-    return AppData(themeMode: CustomThemeMode.light, user: User.initial());
+    return AppData(themeMode: CustomThemeMode.light, user: User.initial(), fcmToken: "");
   }
 
   AppData copyWith({
     User? user,
-    CustomThemeMode? themeMode
+    CustomThemeMode? themeMode,
+    String? fcmToken
   }) {
     return AppData(
       user: user ?? this.user,
       themeMode: themeMode ?? this.themeMode,
+      fcmToken: fcmToken ?? this.fcmToken
     );
   }
 
   @override
-  List<Object?> get props => [user, themeMode];
+  List<Object?> get props => [user, themeMode, fcmToken];
 
 }

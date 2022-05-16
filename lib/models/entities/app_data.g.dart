@@ -19,17 +19,20 @@ class AppDataAdapter extends TypeAdapter<AppData> {
     return AppData(
       themeMode: fields[1] as CustomThemeMode,
       user: fields[0] as User,
+      fcmToken: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, AppData obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.user)
       ..writeByte(1)
-      ..write(obj.themeMode);
+      ..write(obj.themeMode)
+      ..writeByte(2)
+      ..write(obj.fcmToken);
   }
 
   @override

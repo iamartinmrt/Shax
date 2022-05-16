@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class JwtProvider {
+  // TODO : encrypt password in login before call LoginApi
   static const _keyJwt = "KEY_JWT";
   late final FlutterSecureStorage _secureStorage;
 

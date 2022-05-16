@@ -17,4 +17,7 @@ class TextConstants{
   static const String email = "Email";
   static const String home = "Home";
   static const String profile = "Profile";
+  static const String notificationChannelId = "notificationChannelId";
+  static const String notificationChannelName = "notificationChannelName";
+  static const String notificationChannelDescription = "notificationChannelDescription";
 }

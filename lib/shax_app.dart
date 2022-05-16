@@ -8,6 +8,7 @@ import 'package:shax/di/dio_setting.dart';
 import 'package:shax/domain/usecase/local/get_theme_mode_local.dart';
 import 'package:shax/models/entities/app_data.dart';
 import 'package:shax/models/request/no_param_request.dart';
+import 'package:shax/notification/notification_manager.dart';
 import 'package:shax/presentation/screen/splash/splash_screen.dart';
 import 'package:shax/redux/actions/app_state_actions.dart';
 import 'package:shax/redux/actions/user_actions.dart';
@@ -40,6 +41,12 @@ class _ShaxAppState extends State<ShaxApp> {
 
   @override
   void initState(){
+
+    // Future.microtask(()async{
+    //   await NotificationManager.grantPermission();
+    //   NotificationManager.foregroundMessages();
+    // });
+
     InjectionContainer.register();
     _store = createStore(widget.flavorConfig).then((value) {
       _getAppCacheInitial(value);

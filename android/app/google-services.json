@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "845426604597",
+    "project_id": "my-shax",
+    "storage_bucket": "my-shax.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845426604597:android:2ab0cbafa257c5412c0f7c",
+        "android_client_info": {
+          "package_name": "com.artin.mrt.shax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845426604597-n5eg3ks9lnagt09ugg52enbpf5414old.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDINtORYUg5RnSexV_ETVVtjzxC6Xlw6Do"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845426604597-n5eg3ks9lnagt09ugg52enbpf5414old.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

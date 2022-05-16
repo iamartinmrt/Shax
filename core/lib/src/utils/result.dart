@@ -14,7 +14,6 @@ class Result<T> {
   final bool loading;
   final T? content;
   final Object? error;
-  // final ResultSituation situation;
 
   Result._({this.loading = false, this.content, this.error});
 
@@ -29,5 +28,3 @@ class Result<T> {
     }
   }
 }
-
-// enum ResultSituation{idle, success, error}
