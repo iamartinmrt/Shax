@@ -11,6 +11,7 @@ It is an uncompleted sample project.
 - Add Firebase Messaging (Done ✅)
 - Add Comments for better understanding the code
 - Add MockGenerator
+- Add [Freezed](https://pub.dev/packages/freezed)
 
 ### Tech Stack:
 - [Redux State Management](https://pub.dev/packages/flutter_redux)
