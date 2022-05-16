@@ -8,8 +8,9 @@ It is an uncompleted sample project.
 - Create Local datasrouce for user caches (Done ✅)
 - Add custom app theme selector (Done ✅)
 - Add AppCache model for hive (Done ✅)
-- Fix switch theme
-- Add Firebase Messaging
+- Add Firebase Messaging (Done ✅)
+- Add Comments for better understanding the code
+- Add MockGenerator
 
 ### Tech Stack:
 - [Redux State Management](https://pub.dev/packages/flutter_redux)
