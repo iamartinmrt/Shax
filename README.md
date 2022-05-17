@@ -9,7 +9,7 @@ It is an uncompleted sample project.
 - Add custom app theme selector (Done ✅)
 - Add AppCache model for hive (Done ✅)
 - Add Firebase Messaging (Done ✅)
-- Add Comments for better understanding the code
+- Add documantation for better understanding the code (Done ✅)(Need improve❗️)
 - Add MockGenerator
 - Add [Freezed](https://pub.dev/packages/freezed)
 
