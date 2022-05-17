@@ -23,6 +23,8 @@ class NotificationManager{
     );
     print('User granted permission: ${settings.authorizationStatus}');
 
+    /// After initializing FCM start listening on foreground messages
+    /// After receiving [RemoteMessage] if contains notification try to show it
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');

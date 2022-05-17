@@ -50,19 +50,21 @@ class InjectionContainer{
   }
 
   static void _registerModules(){
+
+    /// Create instance of [NavigationGraph] and then register a [Map] which
+    /// contains application routes
     DependencyProvider.registerSingleton(NavigationGraph());
     DependencyProvider.get<NavigationGraph>().registerFeature(AppRoute.routeMap);
-    // CoreModuleInitializer.init();
   }
 
   static void _registerAppDependencies()async{
 
-    //! External
+    /// Inject External
     DependencyProvider.registerLazySingleton<ShaxLogger>(() => ShaxLogger());
     DependencyProvider.registerSingleton<Dio>(DioCustomSetting.createDio());
 
 
-    // Data sources
+    /// Inject Data sources
     DependencyProvider.registerLazySingleton<SplashRemoteDatasource>(
           () => SplashRemoteDatasourceImpl(
             dio: DependencyProvider.get<Dio>(),
@@ -95,7 +97,7 @@ class InjectionContainer{
         ));
 
 
-    // Repository
+    /// Inject Repository
     DependencyProvider.registerLazySingleton<SplashRepository>(
           () => SplashRepositoryImpl(
             datasource: DependencyProvider.get<SplashRemoteDatasource>(),
@@ -122,7 +124,7 @@ class InjectionContainer{
         ));
 
 
-    // Use cases
+    /// Inject Use cases
     DependencyProvider.registerLazySingleton<SplashFetchInitCall>(
             () => SplashFetchInitCall(
               repository: DependencyProvider.get<SplashRepository>(),
@@ -169,7 +171,7 @@ class InjectionContainer{
         ));
 
 
-    // Bloc
+    /// Inject BloC
     DependencyProvider.registerFactory<SplashBloc>(
             () => SplashBloc(
                 fetchInitCall: DependencyProvider.get<SplashFetchInitCall>()
@@ -185,10 +187,6 @@ class InjectionContainer{
             () => SignupBloc(
               signupCallSignupAuth: DependencyProvider.get<SignupCallSignupAuth>(),
             ));
-
-
-    // //! Core
-    // sl.registerLazySingleton(() => RemoteStorage(getStorage: sl()));
   }
 
 }

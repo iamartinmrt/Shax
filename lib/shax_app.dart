@@ -39,13 +39,10 @@ class _ShaxAppState extends State<ShaxApp> {
   late GetUserLocal getUserLocal;
   late GetThemeModeLocal getThemeModeLocal;
 
+  /// - Registering Dependencies
+  /// - First create store then calling functions that need [Store]
   @override
   void initState(){
-
-    // Future.microtask(()async{
-    //   await NotificationManager.grantPermission();
-    //   NotificationManager.foregroundMessages();
-    // });
 
     InjectionContainer.register();
     _store = createStore(widget.flavorConfig).then((value) {
@@ -57,6 +54,7 @@ class _ShaxAppState extends State<ShaxApp> {
     super.initState();
   }
 
+  /// Getting [AppData] information to update [AppState]
   void _getAppCacheInitial(Store<AppState> store){
     getUserLocal = DependencyProvider.get<GetUserLocal>();
     getThemeModeLocal = DependencyProvider.get<GetThemeModeLocal>();
@@ -68,6 +66,12 @@ class _ShaxAppState extends State<ShaxApp> {
     store.dispatch(OnAppDataChanged(appData: AppData.initial().copyWith(user: result.content, themeMode: resultThemeMode.content!.systemToCustom)));
   }
 
+  /// View will not be shown before creating [Store]
+  /// Because it needs some initial states like [ThemeMode]
+  ///
+  /// - Screen is wrapped with [FlavorBanner] to show application version on screen
+  ///
+  /// - You can switch between themes with [themeMode] parameter in [MaterialApp]
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

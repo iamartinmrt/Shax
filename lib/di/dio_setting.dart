@@ -13,6 +13,7 @@ import '../redux/actions/user_actions.dart';
 
 class DioCustomSetting {
 
+  /// Create instance of dio with initial information for DI
   static Dio createDio() {
     return Dio(BaseOptions(
       baseUrl: ApiConstants.baseUrl,
@@ -24,6 +25,12 @@ class DioCustomSetting {
     ));
   }
 
+  /// Listen on changes of the [AppData]. if something changed on [AppData],
+  /// it should change on [AppState] in [Store] too
+  ///
+  /// Adding Interceptor to [Dio] to manage :
+  /// - Adding UserToken to header every time we call an API
+  /// - Checking on responses, if 401? move to login
   static void addInterceptor(Store<AppState> store){
     Box<AppData> hiveBox = DependencyProvider.get<Box<AppData>>();
     ShaxLogger logger = DependencyProvider.get<ShaxLogger>();

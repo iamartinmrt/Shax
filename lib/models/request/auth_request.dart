@@ -1,3 +1,5 @@
+/// A data class to save email and password
+
 class AuthRequest{
 
   final String email;

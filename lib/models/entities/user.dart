@@ -3,6 +3,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user.g.dart';
 
+/// A data class that holds information of user
+/// [User.token] : Contains userToken that coming from server after authentication. It will be used in headers of APIs.
+/// [User.id] : Unique ID of user
+/// [User.email] : email of user
+
 @HiveType(typeId: 1)
 @JsonSerializable(explicitToJson: true)
 class User extends Equatable{

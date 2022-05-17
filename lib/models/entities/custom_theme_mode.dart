@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'custom_theme_mode.g.dart';
 
+/// An alternative for [ThemeMoe] because this class can cache by HiveBox.
 @HiveType(typeId: 2)
 enum CustomThemeMode{
   @HiveField(0)
@@ -11,6 +12,7 @@ enum CustomThemeMode{
   dark,
 }
 
+/// An extension to convert [ThemeMode] to [CustomThemeMode]
 extension ThemeModeExtension on ThemeMode{
   CustomThemeMode get systemToCustom{
     switch(this){
@@ -24,6 +26,7 @@ extension ThemeModeExtension on ThemeMode{
   }
 }
 
+/// An extension to convert [CustomThemeMode] to [ThemeMode]
 extension CustomThemeModeExtension on CustomThemeMode{
   ThemeMode get customToSystem{
     switch(this){

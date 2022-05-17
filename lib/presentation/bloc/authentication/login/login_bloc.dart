@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:core/core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,17 +53,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
         }
         putUserLocal(_result.content!);
 
-        Map<String, String> map;
-        if(Platform.isAndroid){
-          map = <String, String>{
-            "fb_token_android": fbToken,
-          };
-        }else {
-          map = <String, String>{
-            "fb_token_ios": fbToken,
-          };
-        }
-        final _resultFbUpdate = await callUpdateUser(map);
+        final _resultFbUpdate = await callUpdateUser(fbToken);
         if(_resultFbUpdate.isSuccess()){
           if(_resultFbUpdate.content!){
             emit(state.copyWith(formStatus: SubmissionSuccess(),email: "", password: "", user: _result.content!));
@@ -84,9 +72,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
       emit(state.copyWith(formStatus: SubmissionFailed(error.toString())));
       logger.logError(error.toString());
     }
-    // Future.delayed(const Duration(seconds: 2)).then((value) => {
-    //   emit(state.copyWith(formStatus: const InitialFormStatus()))
-    // });
     await Future.delayed(const Duration(seconds: 2)).whenComplete(() {
       emit(state.copyWith(formStatus: const InitialFormStatus()));
     });

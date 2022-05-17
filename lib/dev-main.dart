@@ -28,6 +28,7 @@ void main() async{
   )));
 }
 
+/// This is FCM for background(When application destroyed and it's not running)
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   // notificationManager.initialNotification();
@@ -35,6 +36,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
+/// Data classes that uses [Hive] should register adapters
 void _registerHiveAdapters(){
   Hive.registerAdapter(AppDataAdapter());
   Hive.registerAdapter(CustomThemeModeAdapter());
