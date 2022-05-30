@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hive/hive.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:redux/redux.dart';
+import 'package:shax/common/event/navigation.dart';
 import 'package:shax/di/dio_setting.dart';
 import 'package:shax/domain/usecase/local/get_theme_mode_local.dart';
 import 'package:shax/models/entities/app_data.dart';
@@ -11,6 +13,7 @@ import 'package:shax/models/request/no_param_request.dart';
 import 'package:shax/notification/notification_manager.dart';
 import 'package:shax/presentation/screen/splash/splash_screen.dart';
 import 'package:shax/redux/actions/app_state_actions.dart';
+import 'package:shax/redux/actions/navigation_actions.dart';
 import 'package:shax/redux/actions/user_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
 import 'package:core/core.dart';
@@ -20,6 +23,7 @@ import 'common/flavor/flavor_config.dart';
 import 'common/keys.dart';
 import 'di/injection_container.dart';
 import 'domain/usecase/local/get_user_local.dart';
+import 'domain/usecase/local/put_user_local.dart';
 import 'models/entities/user.dart';
 import 'navigation/navigation_graph.dart';
 import 'navigation/route/app_route.dart';
@@ -45,13 +49,43 @@ class _ShaxAppState extends State<ShaxApp> {
   void initState(){
 
     InjectionContainer.register();
-    _store = createStore(widget.flavorConfig).then((value) {
-      _getAppCacheInitial(value);
-      DioCustomSetting.addInterceptor(value);
-      return value;
+    _store = createStore(widget.flavorConfig).then((store) {
+      _getAppCacheInitial(store);
+      addListeners(store);
+      DioCustomSetting.addInterceptor(store);
+      return store;
     });
 
     super.initState();
+  }
+
+
+  /// Listen on stream of event to send dispatches on [Store]
+  /// - Example: handle unauthenticated and navigating to login page
+  ///
+  /// Listen on changes of the [AppData]. if something changed on [AppData],
+  /// it should change on [AppState] in [Store] too
+  void addListeners(Store<AppState> store){
+    Box<AppData> hiveBox = DependencyProvider.get<Box<AppData>>();
+    ShaxLogger logger = DependencyProvider.get<ShaxLogger>();
+    PutUserLocal putUserLocal = DependencyProvider.get<PutUserLocal>();
+    StreamController streamController = DependencyProvider.get<StreamController>();
+
+    streamController.stream.listen((event) {
+      if(event is UnauthenticatedEvent){
+        logger.logError(event.dioError != null
+                ? "During call ${event.dioError!.response!.requestOptions.path} error ${event.dioError!.response!.statusCode}${event.dioError!.response!.statusMessage} occurred!\nError text: ${event.dioError!.response!.data["message"]}"
+                : event.customErrorMessage!);
+        putUserLocal(User.initial());
+        store.dispatch(NavigateToLoginAction());
+      }
+    });
+
+    hiveBox.watch(key: ApiConstants.appDataInstance).listen((BoxEvent event) {
+      if(!event.deleted && event.value is AppData){
+        store.dispatch(OnAppDataChanged(appData: event.value));
+      }
+    });
   }
 
   /// Getting [AppData] information to update [AppState]

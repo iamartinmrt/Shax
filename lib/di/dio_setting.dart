@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import 'package:redux/redux.dart';
+import 'package:shax/common/event/navigation.dart';
 import 'package:shax/redux/actions/navigation_actions.dart';
 import 'package:shax/redux/states/app_state.dart';
 import '../domain/usecase/local/put_user_local.dart';
@@ -25,27 +28,14 @@ class DioCustomSetting {
     ));
   }
 
-  /// Listen on changes of the [AppData]. if something changed on [AppData],
-  /// it should change on [AppState] in [Store] too
-  ///
+
   /// Adding Interceptor to [Dio] to manage :
   /// - Adding UserToken to header every time we call an API
-  /// - Checking on responses, if 401? move to login
+  /// - Checking on responses, if 401? send event [NavigationEvent] to [StreamController]
   static void addInterceptor(Store<AppState> store){
-    Box<AppData> hiveBox = DependencyProvider.get<Box<AppData>>();
     ShaxLogger logger = DependencyProvider.get<ShaxLogger>();
     Dio dio = DependencyProvider.get<Dio>();
-    PutUserLocal putUserLocal = DependencyProvider.get<PutUserLocal>();
-
-    // store.onChange.listen((event) {
-    //
-    // });
-
-    hiveBox.watch(key: ApiConstants.appDataInstance).listen((BoxEvent event) {
-      if(!event.deleted && event.value is AppData){
-        store.dispatch(OnAppDataChanged(appData: event.value));
-      }
-    });
+    StreamController streamController = DependencyProvider.get<StreamController>();
 
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
@@ -58,22 +48,17 @@ class DioCustomSetting {
       },
       onResponse: (Response response, ResponseInterceptorHandler handler) {
         Response newResponse = response;
-        if(response.statusCode == 401){
-          logger.logInfo("During call ${response.requestOptions.path} error ${response.statusCode}${response.statusMessage} occurred!");
-          putUserLocal(User.initial());
-          store.dispatch(NavigateToLoginAction());
-        }
         if (response.statusCode != 200 && response.statusCode != 201) {
           handler.reject(DioError(requestOptions: response.requestOptions, response: response, type: DioErrorType.response, error: "Status code is ${response.statusCode}"));
         }
         return handler.next(newResponse);
       },
       onError: (DioError error, ErrorInterceptorHandler handler) {
-        logger.logError("During call ${error.response!.requestOptions.path} error ${error.response!.statusCode}${error.response!.statusMessage} occurred!\nError text: ${error.response!.data["message"]}");
         if(error.response!.statusCode == 401){
-          putUserLocal(User.initial());
-          store.dispatch(NavigateToLoginAction());
+          streamController.add(UnauthenticatedEvent.dioError(dioError: error));
+          return handler.next(error);
         }
+        logger.logError("During call ${error.response!.requestOptions.path} error ${error.response!.statusCode}${error.response!.statusMessage} occurred!\nError text: ${error.response!.data["message"]}");
         return handler.next(error);
       },
     ));

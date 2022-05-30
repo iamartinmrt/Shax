@@ -1,0 +1,11 @@
+{
+  "data": {
+    "current_version": 1
+  },
+  "message": "Welcome to Trade Assistant",
+  "showType": "TOAST",
+  "currentTime": 1652828893,
+  "success": true,
+  "index": null,
+  "total": null
+}

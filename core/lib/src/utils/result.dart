@@ -1,4 +1,6 @@
-class Result<T> {
+import 'package:equatable/equatable.dart';
+
+class Result<T> extends Equatable{
   factory Result.success(T data) => Result._(loading: false, content: data);
 
   factory Result.error(Object error) => Result._(loading: false, error: error);
@@ -27,4 +29,7 @@ class Result<T> {
       return 'Loading: $content';
     }
   }
+
+  @override
+  List<Object?> get props => [loading, content, error];
 }

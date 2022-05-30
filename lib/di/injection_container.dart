@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:shax/data/datasources/local/theme/theme_mode_local_datasource.dart';
 import 'package:shax/data/datasources/local/user/user_local_datasource.dart';
+import 'package:shax/data/datasources/mock_generator/splash/splash_mock_generator.dart';
 import 'package:shax/data/datasources/remote/authentication/login/login_remote_datasource.dart';
 import 'package:shax/data/datasources/remote/authentication/signup/signup_remote_datasource.dart';
 import 'package:shax/data/datasources/remote/product/product_remote_datasource.dart';
@@ -59,6 +62,10 @@ class InjectionContainer{
 
   static void _registerAppDependencies()async{
 
+    /// MITM(Man-in-the-middle) is a [Stream] that we use to send data from part
+    /// of application that doesn't have access to store
+    DependencyProvider.registerSingleton<StreamController>(StreamController());
+
     /// Inject External
     DependencyProvider.registerLazySingleton<ShaxLogger>(() => ShaxLogger());
     DependencyProvider.registerSingleton<Dio>(DioCustomSetting.createDio());
@@ -95,12 +102,17 @@ class InjectionContainer{
           hiveBox: DependencyProvider.get<Box<AppData>>(),
           logger: DependencyProvider.get<ShaxLogger>(),
         ));
+    DependencyProvider.registerLazySingleton<MockDataGenerator>(
+            () => MockDataGenerator(
+              streamController: DependencyProvider.get<StreamController>(),
+        ));
 
 
     /// Inject Repository
     DependencyProvider.registerLazySingleton<SplashRepository>(
           () => SplashRepositoryImpl(
             datasource: DependencyProvider.get<SplashRemoteDatasource>(),
+            mockDataGenerator: DependencyProvider.get<MockDataGenerator>()
           ));
     DependencyProvider.registerLazySingleton<LoginRepository>(
             () => LoginRepositoryImpl(

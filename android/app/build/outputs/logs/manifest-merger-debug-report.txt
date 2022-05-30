@@ -7,6 +7,7 @@ INJECTED from /Users/artin/AndroidStudioProjects/shax/android/app/src/main/Andro
 MERGED from /Users/artin/AndroidStudioProjects/shax/android/app/src/main/AndroidManifest.xml:1:1-49:12
 MERGED from [:firebase_messaging] /Users/artin/AndroidStudioProjects/shax/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-46:12
 MERGED from [:firebase_core] /Users/artin/AndroidStudioProjects/shax/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:integration_test] /Users/artin/AndroidStudioProjects/shax/build/integration_test/intermediates/library_manifest/debug/AndroidManifest.xml:7:1-12:12
 MERGED from [:flutter_native_timezone] /Users/artin/AndroidStudioProjects/shax/build/flutter_native_timezone/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:package_info_plus] /Users/artin/AndroidStudioProjects/shax/build/package_info_plus/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_local_notifications] /Users/artin/AndroidStudioProjects/shax/build/flutter_local_notifications/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-28:12
@@ -14,6 +15,7 @@ MERGED from [:device_info_plus] /Users/artin/AndroidStudioProjects/shax/build/de
 MERGED from [:path_provider_android] /Users/artin/AndroidStudioProjects/shax/build/path_provider_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:adjust_sdk] /Users/artin/AndroidStudioProjects/shax/build/adjust_sdk/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_secure_storage] /Users/artin/AndroidStudioProjects/shax/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-13:12
+MERGED from [:connectivity_plus] /Users/artin/AndroidStudioProjects/shax/build/connectivity_plus/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/a35e7deafbbca66133ce715fee63e7b5/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/artin/.gradle/caches/transforms-2/files-2.1/0a729947d9f2682586d5957414cbefca/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/artin/.gradle/caches/transforms-2/files-2.1/9a30143a20a029e68d2a2c8980fee508/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
@@ -21,6 +23,9 @@ MERGED from [com.google.firebase:firebase-messaging:23.0.3] /Users/artin/.gradle
 MERGED from [com.google.firebase:firebase-datatransport:18.1.2] /Users/artin/.gradle/caches/transforms-2/files-2.1/6271c7137602b746178fdf297cc59ec2/jetified-firebase-datatransport-18.1.2/AndroidManifest.xml:15:1-34:12
 MERGED from [com.google.firebase:firebase-installations:17.0.1] /Users/artin/.gradle/caches/transforms-2/files-2.1/75696b8cf80c33699685bc2305e50db4/jetified-firebase-installations-17.0.1/AndroidManifest.xml:2:1-24:12
 MERGED from [com.google.firebase:firebase-common:20.1.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/eb8f2d939ce0af8150b8a3f7bc61f475/jetified-firebase-common-20.1.0/AndroidManifest.xml:15:1-40:12
+MERGED from [androidx.test:rules:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/9f1660161f8d9434e6bd2d7e22d01ea4/rules-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/382718aecd4f71f82b4182f52c423a84/espresso-core-3.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:runner:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/b93e584e0ac4ef5997fc0426a0a74dc9/runner-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.security:security-crypto:1.1.0-alpha03] /Users/artin/.gradle/caches/transforms-2/files-2.1/9da8e8a228ec6e68af2c2b656c545909/jetified-security-crypto-1.1.0-alpha03/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/artin/.gradle/caches/transforms-2/files-2.1/57ea611542694d35688d99e3ac5a4b17/jetified-play-services-stats-17.0.2/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/620ef525a74e68563fec041d3225d230/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -44,6 +49,7 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/artin/.gradle/caches/t
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/be670d67dcb5b35be36acef984dc70cd/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/ca37225edf6c149d12930d0f20b64fbf/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.tracing:tracing:1.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/91acc7dcf3027bd1351c0282e293ccc3/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:monitor:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/8e2a946d855bf5133da65b9e4631da0d/monitor-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/artin/.gradle/caches/transforms-2/files-2.1/9a801501bb5f2382e74c16e591fc436e/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/ae319ec1c06380152865e77d0caaf937/jetified-transport-backend-cct-3.1.3/AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.android.datatransport:transport-runtime:3.1.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/7d9966204c643eef90f6f37cce215e1d/jetified-transport-runtime-3.1.3/AndroidManifest.xml:15:1-41:12
@@ -55,6 +61,7 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/artin/.gradle/
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/f683122fe2309165b64f1016edfc758d/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/ae39f6f8c63bf38ea17f9b606c3dae81/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/3eb8b6b1f9244e0eba2a4e47507cb463/jetified-threetenabp-1.2.3/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/ff1e31ed3df0f966471cde04f7b54fb7/espresso-idling-resource-3.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/70214b0904f5c8000648718594192d8b/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
 INJECTED from /Users/artin/AndroidStudioProjects/shax/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /Users/artin/AndroidStudioProjects/shax/android/app/src/debug/AndroidManifest.xml:1:1-7:12
@@ -185,6 +192,8 @@ MERGED from [:firebase_messaging] /Users/artin/AndroidStudioProjects/shax/build/
 MERGED from [:firebase_messaging] /Users/artin/AndroidStudioProjects/shax/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] /Users/artin/AndroidStudioProjects/shax/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] /Users/artin/AndroidStudioProjects/shax/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:integration_test] /Users/artin/AndroidStudioProjects/shax/build/integration_test/intermediates/library_manifest/debug/AndroidManifest.xml:10:5-44
+MERGED from [:integration_test] /Users/artin/AndroidStudioProjects/shax/build/integration_test/intermediates/library_manifest/debug/AndroidManifest.xml:10:5-44
 MERGED from [:flutter_native_timezone] /Users/artin/AndroidStudioProjects/shax/build/flutter_native_timezone/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_native_timezone] /Users/artin/AndroidStudioProjects/shax/build/flutter_native_timezone/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:package_info_plus] /Users/artin/AndroidStudioProjects/shax/build/package_info_plus/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
@@ -199,6 +208,8 @@ MERGED from [:adjust_sdk] /Users/artin/AndroidStudioProjects/shax/build/adjust_s
 MERGED from [:adjust_sdk] /Users/artin/AndroidStudioProjects/shax/build/adjust_sdk/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_secure_storage] /Users/artin/AndroidStudioProjects/shax/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-11:53
 MERGED from [:flutter_secure_storage] /Users/artin/AndroidStudioProjects/shax/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-11:53
+MERGED from [:connectivity_plus] /Users/artin/AndroidStudioProjects/shax/build/connectivity_plus/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:connectivity_plus] /Users/artin/AndroidStudioProjects/shax/build/connectivity_plus/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/a35e7deafbbca66133ce715fee63e7b5/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/a35e7deafbbca66133ce715fee63e7b5/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/artin/.gradle/caches/transforms-2/files-2.1/0a729947d9f2682586d5957414cbefca/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
@@ -213,6 +224,12 @@ MERGED from [com.google.firebase:firebase-installations:17.0.1] /Users/artin/.gr
 MERGED from [com.google.firebase:firebase-installations:17.0.1] /Users/artin/.gradle/caches/transforms-2/files-2.1/75696b8cf80c33699685bc2305e50db4/jetified-firebase-installations-17.0.1/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-common:20.1.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/eb8f2d939ce0af8150b8a3f7bc61f475/jetified-firebase-common-20.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-common:20.1.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/eb8f2d939ce0af8150b8a3f7bc61f475/jetified-firebase-common-20.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:rules:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/9f1660161f8d9434e6bd2d7e22d01ea4/rules-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:rules:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/9f1660161f8d9434e6bd2d7e22d01ea4/rules-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/382718aecd4f71f82b4182f52c423a84/espresso-core-3.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/382718aecd4f71f82b4182f52c423a84/espresso-core-3.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:runner:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/b93e584e0ac4ef5997fc0426a0a74dc9/runner-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:runner:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/b93e584e0ac4ef5997fc0426a0a74dc9/runner-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.security:security-crypto:1.1.0-alpha03] /Users/artin/.gradle/caches/transforms-2/files-2.1/9da8e8a228ec6e68af2c2b656c545909/jetified-security-crypto-1.1.0-alpha03/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.security:security-crypto:1.1.0-alpha03] /Users/artin/.gradle/caches/transforms-2/files-2.1/9da8e8a228ec6e68af2c2b656c545909/jetified-security-crypto-1.1.0-alpha03/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/artin/.gradle/caches/transforms-2/files-2.1/57ea611542694d35688d99e3ac5a4b17/jetified-play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
@@ -259,6 +276,8 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/artin/.gra
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/ca37225edf6c149d12930d0f20b64fbf/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.tracing:tracing:1.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/91acc7dcf3027bd1351c0282e293ccc3/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.tracing:tracing:1.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/91acc7dcf3027bd1351c0282e293ccc3/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:monitor:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/8e2a946d855bf5133da65b9e4631da0d/monitor-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:monitor:1.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/8e2a946d855bf5133da65b9e4631da0d/monitor-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/artin/.gradle/caches/transforms-2/files-2.1/9a801501bb5f2382e74c16e591fc436e/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/artin/.gradle/caches/transforms-2/files-2.1/9a801501bb5f2382e74c16e591fc436e/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/ae319ec1c06380152865e77d0caaf937/jetified-transport-backend-cct-3.1.3/AndroidManifest.xml:19:5-21:41
@@ -281,6 +300,8 @@ MERGED from [androidx.print:print:1.0.0] /Users/artin/.gradle/caches/transforms-
 MERGED from [androidx.print:print:1.0.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/ae39f6f8c63bf38ea17f9b606c3dae81/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/3eb8b6b1f9244e0eba2a4e47507cb463/jetified-threetenabp-1.2.3/AndroidManifest.xml:5:5-44
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/3eb8b6b1f9244e0eba2a4e47507cb463/jetified-threetenabp-1.2.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/ff1e31ed3df0f966471cde04f7b54fb7/espresso-idling-resource-3.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/ff1e31ed3df0f966471cde04f7b54fb7/espresso-idling-resource-3.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/70214b0904f5c8000648718594192d8b/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/artin/.gradle/caches/transforms-2/files-2.1/70214b0904f5c8000648718594192d8b/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
 INJECTED from /Users/artin/AndroidStudioProjects/shax/android/app/src/debug/AndroidManifest.xml
@@ -315,6 +336,8 @@ MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.1] /Users
 		ADDED from [:firebase_messaging] /Users/artin/AndroidStudioProjects/shax/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:8:22-65
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [:firebase_messaging] /Users/artin/AndroidStudioProjects/shax/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-79
+MERGED from [:connectivity_plus] /Users/artin/AndroidStudioProjects/shax/build/connectivity_plus/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-79
+MERGED from [:connectivity_plus] /Users/artin/AndroidStudioProjects/shax/build/connectivity_plus/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-79
 MERGED from [com.google.firebase:firebase-messaging:23.0.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/d3935466f97d4c694b17575b5be32973/jetified-firebase-messaging-23.0.3/AndroidManifest.xml:25:5-79
 MERGED from [com.google.firebase:firebase-messaging:23.0.3] /Users/artin/.gradle/caches/transforms-2/files-2.1/d3935466f97d4c694b17575b5be32973/jetified-firebase-messaging-23.0.3/AndroidManifest.xml:25:5-79
 MERGED from [com.google.firebase:firebase-installations:17.0.1] /Users/artin/.gradle/caches/transforms-2/files-2.1/75696b8cf80c33699685bc2305e50db4/jetified-firebase-installations-17.0.1/AndroidManifest.xml:10:5-79
